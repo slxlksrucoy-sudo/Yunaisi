@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yunaisi ♡</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            overflow: hidden;
+            background: #08070b;
+            color: #f5edf1;
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        .pantalla {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .luz {
+            position: absolute;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+           background: radial-gradient(
+    circle,
+    rgba(190, 45, 95, 0.22),
+    rgba(120, 30, 70, 0.08) 35%,
+    transparent 70%
+);
+            animation: respirar 5s ease-in-out infinite;
+        }
+
+        .contenido {
+            position: relative;
+            text-align: center;
+            animation: aparecer 2s ease forwards;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(4rem, 12vw, 7rem);
+            font-weight: 400;
+            letter-spacing: 0.28em;
+            padding-left: 0.28em;
+        }
+
+        p {
+            margin: 22px 0 35px;
+            font-family: Arial, sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            opacity: 0.6;
+        }
+
+        button {
+            padding: 13px 30px;
+            border: 1px solid rgba(255,255,255,0.25);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.03);
+            color: white;
+            font-family: Arial, sans-serif;
+            letter-spacing: 0.18em;
+            cursor: pointer;
+            transition: 0.35s ease;
+        }
+
+        button:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.5);
+            transform: translateY(-2px);
+        }
+
+        .estrella {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            background: white;
+            opacity: 0.4;
+            animation: flotar 6s ease-in-out infinite;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes respirar {
+            0%, 100% {
+                transform: scale(0.95);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: scale(1.08);
+                opacity: 1;
+            }
+        }
+
+        @keyframes flotar {
+            0%, 100% {
+                transform: translateY(0);
+                opacity: 0.2;
+            }
+
+            50% {
+                transform: translateY(-18px);
+                opacity: 0.7;
+            }
+        }
+                .salida {
+            animation: desaparecer 1.2s ease forwards;
+        }
+
+        @keyframes desaparecer {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+                .segunda-pantalla {
+            position: fixed;
+            inset: 0;
+            background: #08070b;
+                overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+      .mensaje {
+    max-width: 700px;
+    padding: 30px;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+   .segunda-pantalla.mostrar .mensaje {
+    animation: aparecerMensaje 1.5s ease forwards;
+}
+
+@keyframes aparecerMensaje {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes respirarSegunda {
+    0%, 100% {
+        transform: scale(0.9);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+
+        .mensaje span {
+            font-family: Arial, sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            opacity: 0.5;
+        }
+
+        .mensaje h2 {
+            margin: 25px 0;
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        .mensaje p {
+            max-width: 500px;
+            margin: auto;
+            line-height: 1.8;
+            text-transform: none;
+            letter-spacing: 0.03em;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 1rem;
+            opacity: 0.65;
+        }
+        .boton-amor {
+    margin-top: 10px;
+    opacity: 0.8;
+}
+
+.mensaje-amor {
+    max-width: 500px;
+    margin: 25px auto 0;
+    display: none;
+}
+
+.mensaje-amor.mostrar {
+    display: block;
+    animation: aparecerAmor 1.2s ease forwards;
+}
+
+@keyframes aparecerAmor {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 0.7;
+        transform: translateY(0);
+    }
+}
+.boton-secreto {
+    margin-top: 25px;
+    opacity: 0;
+    display: none;
+}
+
+.boton-secreto.mostrar {
+    display: inline-block;
+    animation: aparecerBoton 1s ease forwards;
+}
+
+.mensaje-secreto {
+    display: none;
+    max-width: 500px;
+    margin: 25px auto 0;
+    font-size: 1rem;
+    line-height: 1.8;
+    opacity: 0;
+}
+
+.mensaje-secreto.mostrar {
+    display: block;
+    animation: aparecerSecreto 1.4s ease forwards;
+}
+
+@keyframes aparecerBoton {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 0.7;
+        transform: translateY(0);
+    }
+}
+
+@keyframes aparecerSecreto {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 0.75;
+        transform: translateY(0);
+    }
+}
+.tercera-pantalla {
+    position: fixed;
+    inset: 0;
+    background: #08070b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.tercer-contenido {
+    max-width: 700px;
+    padding: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.tercer-contenido span {
+    font-family: Arial, sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    opacity: 0.45;
+}
+
+.tercer-contenido h2 {
+    margin: 25px 0;
+    font-size: clamp(2.3rem, 6vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.15;
+}
+
+.tercer-contenido p {
+    max-width: 500px;
+    margin: auto;
+    line-height: 1.8;
+    text-transform: none;
+    letter-spacing: 0.03em;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1rem;
+    opacity: 0.6;
+}
+.boton-siguiente {
+    margin-top: 30px;
+    display: none;
+    opacity: 0;
+}
+
+.boton-siguiente.mostrar {
+    display: inline-block;
+    animation: aparecerBoton 1s ease forwards;
+}
+.tercera-pantalla.mostrar .tercer-contenido {
+    animation: aparecerTercera 1.5s ease forwards;
+}
+
+@keyframes aparecerTercera {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.opciones-amor {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 35px;
+}
+
+.opciones-amor button {
+    font-size: 0.65rem;
+    padding: 10px 16px;
+    opacity: 0.65;
+    transition: 0.35s ease;
+}
+
+.opciones-amor button:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+.recuerdo {
+    max-width: 500px;
+    min-height: 30px;
+    margin: 28px auto 0;
+    font-size: 0.95rem !important;
+    line-height: 1.8 !important;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: 0.8s ease;
+}
+
+.recuerdo.mostrar {
+    opacity: 0.7;
+    transform: translateY(0);
+}
+.apodos {
+    margin-top: 50px;
+    opacity: 0.85;
+}
+
+.apodos > span {
+    font-family: Arial, sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    opacity: 0.45;
+}
+
+.apodos h3 {
+    margin: 15px 0 18px;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    font-weight: 400;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.apodos button {
+    font-size: 0.65rem;
+    padding: 9px 18px;
+    opacity: 0.6;
+}
+
+.apodos button:hover {
+    opacity: 1;
+}
+.juego-pantalla {
+    position: fixed;
+    inset: 0;
+    background: #08070b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.juego-contenido {
+    width: min(90vw, 700px);
+    position: relative;
+    z-index: 2;
+}
+
+.juego-contenido > span {
+    font-family: Arial, sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.45;
+}
+
+.juego-contenido h2 {
+    margin: 15px 0 25px;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 400;
+}
+
+.zona-juego {
+    position: relative;
+    width: 100%;
+    height: 320px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 18px;
+    background: rgba(255,255,255,0.02);
+    overflow: hidden;
+}
+
+.corazon {
+    position: absolute;
+    font-size: 28px;
+    user-select: none;
+    left: 50%;
+    top: 20px;
+    transform: translateX(-50%);
+    z-index: 5;
+}
+
+.plataforma {
+    position: absolute;
+    left: 50%;
+    bottom: 12px;
+    transform: translateX(-50%);
+    width: 110px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.8);
+}
+.zona-juego {
+    touch-action: none;
+}
+
+.plataforma {
+    cursor: grab;
+    touch-action: none;
+}
+
+.plataforma:active {
+    cursor: grabbing;
+}
+
+.corazon {
+    position: absolute;
+    font-size: 28px;
+    user-select: none;
+    pointer-events: none;
+}
+.mensaje-final {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+}
+    </style>
+</head>
+<script>
+    function entrar() {
+        const primera = document.querySelector(".pantalla");
+        const segunda = document.querySelector(".segunda-pantalla");
+
+        primera.classList.add("salida");
+
+        setTimeout(() => {
+            segunda.style.opacity = "1";
+            segunda.style.pointerEvents = "auto";
+            segunda.classList.add("mostrar");
+        }, 1200);
+    }
+
+   function mostrarMensaje() {
+    const mensaje = document.querySelector(".mensaje-amor");
+    const boton = document.querySelector(".boton-secreto");
+
+    mensaje.classList.add("mostrar");
+
+    setTimeout(() => {
+        boton.classList.add("mostrar");
+    }, 1000);
+}
+
+function mostrarSecreto() {
+    const secreto = document.querySelector(".mensaje-secreto");
+    const boton = document.querySelector(".boton-siguiente");
+
+    secreto.classList.add("mostrar");
+
+    setTimeout(() => {
+        boton.classList.add("mostrar");
+    }, 1400);
+}
+
+function mostrarTercera() {
+    const segunda = document.querySelector(".segunda-pantalla");
+    const tercera = document.querySelector(".tercera-pantalla");
+
+    segunda.classList.add("salida");
+
+    setTimeout(() => {
+        tercera.style.opacity = "1";
+        tercera.style.pointerEvents = "auto";
+        tercera.classList.add("mostrar");
+    }, 1000);
+}
+function mostrarRecuerdo(tipo) {
+    const recuerdo = document.querySelector("#recuerdo");
+
+    if (tipo === "uno") {
+        recuerdo.textContent =
+            "Me encanta tu forma de ser, lo inteligente que eres aunque tu no lo creas, lo hermosa que te veo ante mis ojos, no eres perfecta, pero para mi eres la mujer mas hermosa y perfecta que existe y puede llegar a existir.";
+    }
+
+    if (tipo === "dos") {
+        recuerdo.textContent =
+            "Contigo siento que puedo ser yo mismo. Me haces sentir amado,y espero que tu tambien te sientas asi, vamos a tener discusiones, muchas seguro, pero no voy a dejar que se termine lo nuestro por un mal momento, por que de verdad quiero que seas tu.";
+    }
+
+    if (tipo === "tres") {
+        recuerdo.textContent =
+            "Nunca olvides que eres importante para mí y que, cuando lo necesites, siempre tendrás un lugar conmigo. Dentro de poco empiezan las clases para los2, tendremos menos tiempo para hablar, no jugaremos como antes, pero quiero que sepas que aunque no tengamos tanto tiempo, no voy a dejar de amarte, ni en esta vida ni en ninguna bebe. ";
+    }
+
+    recuerdo.classList.remove("mostrar");
+
+    setTimeout(() => {
+        recuerdo.classList.add("mostrar");
+    }, 50);
+}
+function cambiarApodo() {
+    const apodo = document.querySelector("#apodoActual");
+
+    const apodos = [
+        "mi amor",
+        "mi princesa",
+        "mi bebé",
+        "mi cachorrita",
+        "mi vida",
+        "mi reina",
+        "mi tesoro",
+        "mi corazón",
+        "mi todo"
+    ];
+
+    const actual = apodos.indexOf(apodo.textContent);
+    const siguiente = (actual + 1) % apodos.length;
+
+    apodo.style.opacity = "0";
+    apodo.style.transform = "translateY(8px)";
+
+    setTimeout(() => {
+        apodo.textContent = apodos[siguiente];
+        apodo.style.opacity = "1";
+        apodo.style.transform = "translateY(0)";
+    }, 400);
+}
+
+
+    function mostrarJuego() {
+    const tercera = document.querySelector(".tercera-pantalla");
+    const juego = document.querySelector(".juego-pantalla");
+
+    tercera.classList.add("salida");
+
+    setTimeout(() => {
+        juego.style.opacity = "1";
+        juego.style.pointerEvents = "auto";
+
+        if (window.iniciarCuentaAtras) {
+            window.iniciarCuentaAtras();
+        }
+    }, 1000);
+}
+
+</script>
+<body>
+
+    <main class="pantalla">
+
+        <div class="luz"></div>
+
+        <span class="estrella" style="top:18%; left:22%;"></span>
+        <span class="estrella" style="top:31%; left:76%;"></span>
+        <span class="estrella" style="top:72%; left:17%;"></span>
+        <span class="estrella" style="top:78%; left:82%;"></span>
+        <span class="estrella" style="top:14%; left:63%;"></span>
+
+        <section class="contenido">
+
+            <h1>YUNAISI</h1>
+
+            <p>Hice esto para ti.</p>
+
+           <button onclick="entrar()">ENTRAR</button>
+
+        </section>
+
+    </main>
+<section class="segunda-pantalla">
+    <div class="mensaje">
+        <span>Para ti, Mi bebe.</span>
+
+        <h2>
+            Quiero que recuerdes<br>
+            lo mucho que te amo.
+        </h2>
+
+       <button class="boton-amor" onclick="mostrarMensaje()">
+    ♡ abre esto
+</button>
+
+<p class="mensaje-amor">
+    Incluso en los días en los que no te sientas bien,
+    nunca olvides que no estás sola.
+    <br><br>
+    Estoy aquí para ti, mi amor.
+    <br>
+    No tienes que poder con todo tú sola.
+</p>
+<button class="boton-secreto" onclick="mostrarSecreto()">
+    hay algo más...
+</button>
+
+<p class="mensaje-secreto">
+    Entre tantas personas en el mundo, tu eres la unica que me hace sentir completo. Eres mi felicidad, y siempre lo seras.
+</p>
+<button class="boton-siguiente" onclick="mostrarTercera()">
+    sigue leyendo →
+</button>
+
+    </div>
+</section>
+
+<section class="tercera-pantalla">
+    <div class="tercer-contenido">
+
+        <span>Yunaisi</span>
+
+        <h2>
+            Hay cosas que<br>
+            nunca quiero que olvides.
+        </h2>
+
+        <p>
+            No importa cómo haya sido tu día.
+            Aquí siempre tendrás un lugar donde recordar
+            que eres importante para mí.
+        </p>
+<div class="opciones-amor">
+
+    <button onclick="mostrarRecuerdo('uno')">
+        cómo eres
+    </button>
+
+    <button onclick="mostrarRecuerdo('dos')">
+        cómo me haces sentir
+    </button>
+
+    <button onclick="mostrarRecuerdo('tres')">
+        lo que quiero que recuerdes
+    </button>
+
+</div>
+
+<p id="recuerdo" class="recuerdo"></p>
+<div class="apodos">
+    <span>Y tú sabes que para mí eres...</span>
+
+    <h3 id="apodoActual">mi amor</h3>
+
+    <button onclick="cambiarApodo()">
+        otro ♡
+    </button>
+</div>
+<button class="boton-juego" onclick="mostrarJuego()">
+    ¿quieres jugar? →
+</button>
+    </div>
+</section>
+<section class="juego-pantalla">
+
+    <div class="juego-contenido">
+
+        <span>Un último juego</span>
+
+        <h2>Protege mi corazón ♡</h2>
+<div id="contador-juego">10</div>
+        <div class="zona-juego">
+
+            <div class="corazon">♡</div>
+
+            <div class="plataforma"></div>
+
+        </div>
+<div id="mensaje-final" class="mensaje-final">
+    <h2>Lo conseguiste ♡</h2>
+    <p>Protegiste mi corazón durante 10 segundos, yo protegere el tuyo por siempre.</p>
+</div>
+    </div>
+
+</section>
+<script>
+
+window.addEventListener("DOMContentLoaded", () => {
+
+    const zonaJuego = document.querySelector(".zona-juego");
+    const plataforma = document.querySelector(".plataforma");
+    const corazon = document.querySelector(".corazon");
+
+    let corazonX = 100;
+let corazonY = 20;
+
+
+
+let velocidadX = 2;
+let velocidad = 0;
+let tiempo = 10;
+let cuentaAtras;
+let juegoTerminado = false;
+
+const contador = document.getElementById("contador-juego");
+const mensajeFinal = document.getElementById("mensaje-final");
+
+    corazon.style.left = "50%";
+    corazon.style.top = "20px";
+
+    clearInterval(cuentaAtras);
+function iniciarCuentaAtras() {
+    juegoTerminado = false;
+    clearInterval(cuentaAtras);
+
+    tiempo = 10;
+    contador.textContent = tiempo;
+
+    zonaJuego.style.display = "block";
+    contador.style.display = "block";
+    mensajeFinal.style.display = "none";
+    
+ juegoTerminado = false;
+    clearInterval(cuentaAtras);
+
+    clearInterval(cuentaAtras);
+    if (tiempo <= 0) {
+    clearInterval(cuentaAtras);
+
+    tiempo = 0;
+    contador.textContent = "0";
+
+    zonaJuego.style.display = "none";
+    contador.style.display = "none";
+    mensajeFinal.style.display = "block";
+}
+
+    cuentaAtras = setInterval(() => {
+        tiempo--;
+        contador.textContent = tiempo;
+if (tiempo <= 0) {
+    clearInterval(cuentaAtras);
+
+    juegoTerminado = true;
+
+    zonaJuego.style.display = "none";
+    contador.style.display = "none";
+    mensajeFinal.style.display = "block";
+}
+        if (tiempo <= 0) {
+            clearInterval(cuentaAtras);
+
+            zonaJuego.style.display = "none";
+            contador.style.display = "none";
+            mensajeFinal.style.display = "block";
+        }
+    }, 1000);
+}
+
+window.iniciarCuentaAtras = iniciarCuentaAtras;
+
+function animarCorazon() {
+      velocidad += 0.15;
+corazonY += velocidad;
+
+if (Math.random() < 0.025) {
+    velocidadX += (Math.random() - 0.5) * 3;
+}
+
+velocidadX = Math.max(-4, Math.min(4, velocidadX));
+corazonX += velocidadX;
+
+velocidadX = Math.max(-4, Math.min(4, velocidadX));
+
+corazonX += velocidadX;
+
+velocidadX = Math.max(-3, Math.min(3, velocidadX));
+
+corazonX += velocidadX;
+
+        const limite = zonaJuego.clientHeight - corazon.offsetHeight;
+       if (corazonX <= 0) {
+    corazonX = 0;
+    velocidadX = Math.abs(velocidadX) * (0.7 + Math.random() * 0.6);
+}
+
+if (corazonX + corazon.offsetWidth >= zonaJuego.clientWidth) {
+    corazonX = zonaJuego.clientWidth - corazon.offsetWidth;
+    velocidadX = -Math.abs(velocidadX) * (0.7 + Math.random() * 0.6);
+}
+
+       const plataformaY =
+    zonaJuego.clientHeight - plataforma.offsetHeight - 12;
+
+const plataformaIzquierda =
+    plataforma.offsetLeft - plataforma.offsetWidth / 2;
+
+const plataformaDerecha =
+    plataforma.offsetLeft + plataforma.offsetWidth / 2;
+
+
+
+if (
+    corazonY + corazon.offsetHeight >= plataformaY &&
+    corazonY + corazon.offsetHeight <= plataformaY + 15 &&
+    corazonX >= plataformaIzquierda &&
+    corazonX <= plataformaDerecha &&
+    velocidad > 0
+) {
+    corazonY = plataformaY - corazon.offsetHeight;
+    velocidad = -6;
+}
+
+
+if (corazonY >= limite && !juegoTerminado) {
+    corazonY = 20;
+    velocidad = 0;
+
+    iniciarCuentaAtras();
+}
+
+        corazon.style.left = corazonX + "px";
+corazon.style.top = corazonY + "px";
+
+        requestAnimationFrame(animarCorazon);
+    }
+
+
+    function moverPlataforma(x) {
+
+        const rect = zonaJuego.getBoundingClientRect();
+        const mitad = plataforma.offsetWidth / 2;
+
+        let posicion = x - rect.left;
+
+        posicion = Math.max(mitad, posicion);
+        posicion = Math.min(rect.width - mitad, posicion);
+
+        plataforma.style.left = posicion + "px";
+    }
+
+
+    let tocando = false;
+
+    zonaJuego.addEventListener("pointerdown", (e) => {
+        tocando = true;
+        moverPlataforma(e.clientX);
+    });
+
+    zonaJuego.addEventListener("pointermove", (e) => {
+        if (tocando) {
+            moverPlataforma(e.clientX);
+        }
+    });
+
+    zonaJuego.addEventListener("pointerup", () => {
+        tocando = false;
+    });
+
+    zonaJuego.addEventListener("pointercancel", () => {
+        tocando = false;
+    });
+
+
+      animarCorazon();
+
+});
+</script>
+</body>
+</html>
